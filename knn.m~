@@ -1,0 +1,9 @@
+load fisheriris
+X = meas;
+Y = species;
+rng(10); % For reproducibility
+Mdl = fitcknn(X,Y,'NumNeighbors',4);
+rloss = resubLoss(Mdl,'mode','individual') %L = resubLoss(ens) returns the resubstitution loss, meaning the loss computed for the data that fitensemble used to create ens.
+
+CVMdl = crossval(Mdl);
+kloss = kfoldLoss(CVMdl)
